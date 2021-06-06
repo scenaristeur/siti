@@ -1,5 +1,5 @@
 <template>
-  <div>    
+  <div>
     <tiptap v-model="file" @input="sauve"/>
     <ActionList @action="action" />
   </div>
@@ -37,7 +37,7 @@ export default {
     action(a){
       console.log("action",a)
     },
-    sauve(e){
+    sauve(){
       // console.log(e)
       // console.log(this.file)
       this.file.content = this.file.type.mime == "text/html" ? '<meta charset="utf-8">'+this.file.content : this.file.content

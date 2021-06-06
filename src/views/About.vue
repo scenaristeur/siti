@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <b-container class="about">
+    <h4>Largement inspiré du merveilleux YesWiki https://yeswiki.net/?AccueiL</h4>
+  </b-container>
 </template>

@@ -22,3 +22,6 @@ npm run lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### editable
+https://www.fabiofranchino.com/blog/making-contenteditable-in-vue-from-scratch/

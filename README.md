@@ -28,3 +28,10 @@ https://www.fabiofranchino.com/blog/making-contenteditable-in-vue-from-scratch/
 
 ### edition de docs
 https://vuejsexamples.com/paper-sized-wysiwyg-document-editor-for-vue/
+
+### tiptap
+https://www.tiptap.dev est un wrapper de https://prosemirror.net/
+
+### medium editor
+- original https://github.com/tui2tone/vue2-medium-editor
+- customized ? https://github.com/banchojp/vuejs-medium-editor

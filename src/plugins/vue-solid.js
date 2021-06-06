@@ -116,7 +116,7 @@ const plugin = {
         let type = params.type && params.type.mime || "text/html"
         const savedFile = await overwriteFile(
           params.path,
-          new Blob(['<meta charset="utf-8">'+params.content], { type: type }),
+          new Blob([params.content], { type: type }),
           { fetch: sc.fetch }
           // Or in Node:
           // Buffer.from("This is a plain piece of text", "utf8"), { type: "plain/text" })
@@ -134,7 +134,7 @@ const plugin = {
         let slug = encodeURIComponent(params.name)
         const savedFile = await saveFileInContainer(
           params.dest,
-          new Blob([params.content || '<meta charset="utf-8">'], { type: type }),
+          new Blob([params.content || ''], { type: type }),
           { slug: slug, fetch: sc.fetch }
         );
         let saved = `${getSourceUrl(savedFile)}`

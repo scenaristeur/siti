@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="editor">
     <bubble-menu
     class="bubble-menu"
     :tippy-options="{ duration: 100 }"
@@ -46,9 +46,8 @@ import {
   BubbleMenu,
   FloatingMenu,
 } from '@tiptap/vue-2'
+
 import StarterKit from '@tiptap/starter-kit'
-// import Highlight from '@tiptap/extension-highlight'
-// import Typography from '@tiptap/extension-typography'
 
 export default {
   name: "TipTap",
@@ -56,11 +55,13 @@ export default {
     EditorContent,
     BubbleMenu,
     FloatingMenu,
+    // Bold,
+    //  Link
   },
   props: {
     value: {
-      type: String,
-      default: '',
+      type: Object,
+          default: function() {return {content: "", type: {mime: ""}}},
     },
   },
 
@@ -71,18 +72,30 @@ export default {
   },
 
   watch: {
-    value(value) {
-      // HTML
-      const isSame = this.editor.getHTML() === value
+    value() {
+      console.log(this.value, this.value.type.mime)
+      let type = this.value.type && this.value.type.mime || undefined
 
-      // JSON
-      // const isSame = this.editor.getJSON().toString() === value.toString()
+
+      let isSame = false
+      if(type == "application/json"){
+        // JSON
+        console.log("type",type)
+        this.value.content = JSON.parse(this.value.content)
+        console.log(this.value.content)
+        isSame = this.editor.getJSON().toString() === this.value.content
+      }else{
+        // HTML
+        console.log("type",type)
+        isSame = this.editor.getHTML() === this.value.content
+      }
+
 
       if (isSame) {
         return
       }
 
-      this.editor.commands.setContent(this.value, false)
+      this.editor.commands.setContent(this.value.content, false)
     },
   },
 
@@ -90,16 +103,20 @@ export default {
     this.editor = new Editor({
       extensions: [
         StarterKit,
-        //  Highlight,
-        //  Typography,
       ],
-      content: "OKO"+this.value,
+      content: this.value.content,
       onBlur: () => {
-        // HTML
-        this.$emit('input', this.editor.getHTML())
 
-        // JSON
-        // this.$emit('input', this.editor.getJSON())
+        let type = this.value.type.mime
+        if(type == "application/json"){
+          this.value.content = JSON.stringify(this.editor.getJSON())
+          console.log("content",this.value.content)
+          this.$emit('input', this.value)
+        }else{
+          console.log("type",type)
+          this.value.content = this.editor.getHTML()
+          this.$emit('input', this.value)
+        }
       },
     })
   },

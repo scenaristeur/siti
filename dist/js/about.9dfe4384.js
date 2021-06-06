@@ -1,2 +1,0 @@
-(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["about"],{f820:function(e,t,n){"use strict";n.r(t);var i=function(){var e=this,t=e.$createElement,n=e._self._c||t;return n("b-container",{staticClass:"about"},[n("h4",[e._v("Largement inspiré du merveilleux YesWiki https://yeswiki.net/?AccueiL")])])},s=[],u=n("2877"),a={},c=Object(u["a"])(a,i,s,!1,null,null,null);t["default"]=c.exports}}]);
-//# sourceMappingURL=about.9dfe4384.js.map

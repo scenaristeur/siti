@@ -3,7 +3,7 @@
     <ButtonToolbar v-if="editable" @sauve="sauve" @format="format" />
     <div
     ref="editableDiv"
-    v-text="txt"
+    v-html="txt"
     variant = "sucess"
 
     @dblclick="dblclick"
@@ -95,7 +95,8 @@ export default {
 
         let balise = ""
         if(typeof f == "number"){
-          balise = "=".repeat(7-f)
+        //  balise = "=".repeat(7-f)
+        balise = "h"+f
         }else{
           console.log("todo format",f)
         }
@@ -107,7 +108,7 @@ export default {
         if (window.getSelection) {
           sel = window.getSelection();
           let txt = sel.toString()
-          let replacementText = balise+txt+balise
+          let replacementText = "<"+balise+">"+txt+"</"+balise+">"
           if (sel.rangeCount) {
             range = sel.getRangeAt(0);
             range.deleteContents();
@@ -116,7 +117,7 @@ export default {
         } else if (document.selection && document.selection.createRange) {
           range = document.selection.createRange();
           let txt = range.txt
-          let replacementText = balise+txt+balise
+          let replacementText = "<"+balise+">"+txt+"</"+balise+">"
           range.text = replacementText;
         }
       },

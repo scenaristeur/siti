@@ -15,6 +15,8 @@
     "@inrupt/vocab-common-rdf": "^0.7.4",
     "@inrupt/vocab-inrupt-common": "^0.7.4",
     "@inrupt/vocab-solid-common": "^0.7.4",
+    "@tiptap/starter-kit": "^2.0.0-beta.76",
+    "@tiptap/vue-2": "^2.0.0-beta.34",
     "bootstrap": "^5.0.1",
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",

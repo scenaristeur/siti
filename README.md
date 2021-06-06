@@ -25,3 +25,6 @@ See [Configuration Reference](https://cli.vuejs.org/config/).
 
 ### editable
 https://www.fabiofranchino.com/blog/making-contenteditable-in-vue-from-scratch/
+
+### edition de docs
+https://vuejsexamples.com/paper-sized-wysiwyg-document-editor-for-vue/

@@ -105,11 +105,46 @@ const plugin = {
       const myDataset = await getSolidDataset( url, {fetch: sc.fetch});
       console.log(myDataset)
       let resources = await getContainedResourceUrlAll(myDataset,{fetch: sc.fetch} )
-      let pages = resources.map(x => {return {url: x, name: x.replace(url,"")}})
+      let pages = resources.map(x => {return {url: x, name: x.replace(url,"").replace(".html", "")}})
       console.log("Pages", pages)
       return pages
     }
 
+    Vue.prototype.$save = async function(params){
+      console.log(params)
+      try{
+        let type = params.type && params.type.mime || "text/html"
+        const savedFile = await overwriteFile(
+          params.path,
+          new Blob(['<meta charset="utf-8">'+params.content], { type: type }),
+          { fetch: sc.fetch }
+          // Or in Node:
+          // Buffer.from("This is a plain piece of text", "utf8"), { type: "plain/text" })
+        );
+        console.log("File saved!", savedFile);
+
+      }catch(e){
+        alert(e)
+      }
+    }
+
+    Vue.prototype.$createThing = async function(params){
+      try{
+        let type = params.type && params.type.mime || "text/html"
+        let slug = encodeURIComponent(params.name)
+        const savedFile = await saveFileInContainer(
+          params.dest,
+          new Blob([params.content || '<meta charset="utf-8">'], { type: type }),
+          { slug: slug, fetch: sc.fetch }
+        );
+        let saved = `${getSourceUrl(savedFile)}`
+        console.log("File saved at",saved);
+        params.url = saved
+        this.$setCurrentThing(params)
+      } catch(e){
+        alert(e)
+      }
+    },
 
 
     Vue.prototype.$setCurrentThing = async function(page){
@@ -289,23 +324,7 @@ const plugin = {
     //   console.log("File saved",savedThing);
     // },
 
-    Vue.prototype.$save = async function(params){
-      console.log(params)
-      try{
-        let type = params.type && params.type.mime || "plain/text"
-        const savedFile = await overwriteFile(
-          params.path,
-          new Blob([params.content], { type: type }),
-          { fetch: sc.fetch }
-          // Or in Node:
-          // Buffer.from("This is a plain piece of text", "utf8"), { type: "plain/text" })
-        );
-        console.log("File saved!", savedFile);
 
-      }catch(e){
-        alert(e)
-      }
-    }
     Vue.prototype.$uploadLocalToPod = async function(params){
       try{
         console.log(params)

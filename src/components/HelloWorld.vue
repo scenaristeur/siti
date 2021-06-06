@@ -1,7 +1,8 @@
 <template>
   <b-container class="hello">
     <!-- <h1>{{ msg }}</h1> -->
-    <Test />
+    <Page />
+    <Pages />
   </b-container>
 </template>
 
@@ -12,7 +13,8 @@ export default {
     msg: String
   },
   components: {
-    'Test': () => import('@/components/editable/Test'),
+    'Page': () => import('@/components/editable/Page'),
+    'Pages': () => import('@/components/layout/Pages'),
   },
 }
 </script>

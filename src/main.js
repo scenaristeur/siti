@@ -4,6 +4,9 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 
+import VueSolid from './plugins/vue-solid';
+Vue.use(VueSolid, {store: store});
+
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 
 // Import Bootstrap an BootstrapVue CSS files (order is important)

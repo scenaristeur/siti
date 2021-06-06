@@ -30,6 +30,7 @@
             <template #button-content>
               <em>User</em>
             </template>
+            <Login />
             <b-dropdown-item href="#">Profile</b-dropdown-item>
             <b-dropdown-item href="#">Sign Out</b-dropdown-item>
           </b-nav-item-dropdown>
@@ -41,7 +42,10 @@
 
 <script>
 export default {
-name:"NavBar"
+name:"NavBar",
+components: {
+  'Login': () => import('@/components/solid/Login'),
+},
 }
 </script>
 

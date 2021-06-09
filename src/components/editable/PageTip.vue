@@ -1,10 +1,17 @@
 <template>
   <div>
 
+    <input type="range" min="0" max="400" step="1" v-model="data.x" />
+    <input type="range" min="0" max="200" step="1" v-model="data.y" />
+
+    <P5 src="./sketch1.js" :data="data" v-bind.sync="data" />
+  <P5 src="./sketch2.js" :data="data" v-bind.sync="data" />
     <Textarea v-if="file.type.mime == 'text/plain'" v-model="file" @sauve="sauve"/>
     <tiptap v-if="file.type.mime == 'text/html'" v-model="file" @input="sauve"/>
     <ActionList @action="action" />
     {{ file }}
+    <hr>
+    {{ things }}
   </div>
 </template>
 
@@ -13,6 +20,7 @@ export default {
   name: "PageTip",
   data(){
     return{
+      data: {x:200, y: 100}
       // txt: `======Félicitations, votre wiki est installé !
       //
       // ===""YesWiki"" : un outil convivial potentiellement collaboratif===
@@ -35,7 +43,8 @@ export default {
     // 'ButtonToolbar': () => import('@/components/editable/ButtonToolbar'),
     'ActionList': () => import('@/components/editable/ActionList'),
     'Tiptap':() => import ('@/components/editable/TipTap.vue'),
-    'Textarea':() => import ('@/components/editable/Textarea.vue')
+    'Textarea':() => import ('@/components/editable/Textarea.vue'),
+    'P5': () => import ('@/components/editable/P5.vue'),
   },
   methods:{
     action(a){
@@ -52,11 +61,19 @@ export default {
   watch:{
     file(){
       console.log(this.file)
+      this.things = []
+    },
+    things(){
+      this.file= {content: null, type: {mime: null}}
     }
   },
   computed:{
     file:{
       get () { return this.$store.state.viki.file},
+      set (/*value*/) { /*this.updateTodo(value)*/ }
+    },
+    things:{
+      get () { return this.$store.state.solid.things},
       set (/*value*/) { /*this.updateTodo(value)*/ }
     },
   }

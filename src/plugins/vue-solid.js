@@ -188,6 +188,7 @@ const plugin = {
               myDataset,
               url
             );
+            console.log(things)
             store.commit('solid/setThings',things)
           }
         }

@@ -198,7 +198,7 @@ export default {
   },
 
   mounted() {
-    let app = this
+  //  let app = this
     this.editor = new Editor({
       extensions: [
         StarterKit,

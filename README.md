@@ -35,3 +35,5 @@ https://www.tiptap.dev est un wrapper de https://prosemirror.net/
 ### medium editor
 - customized avec liens, code, image https://github.com/banchojp/vuejs-medium-editor
 - original https://github.com/tui2tone/vue2-medium-editor
+### a voir
+-https://www.vue2editor.com/examples/#use-a-live-preview  

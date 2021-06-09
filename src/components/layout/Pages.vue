@@ -3,7 +3,7 @@
     <b>Pages</b>   <b-button class="ml-3" size="sm" variant="light" @click="updatePageList" title="refresh"> <b-icon icon="
       journal-arrow-down" aria-hidden="true"></b-icon></b-button>
 
-      <b-input-group prepend="NouvellePage" class="mt-3">
+      <b-input-group prepend="new" class="mt-3">
         <b-form-input v-model="npname"></b-form-input>
         <b-input-group-append>
           <b-button variant="info" @click="createPage">Créer</b-button>
@@ -11,9 +11,13 @@
 
       </b-input-group>
       <b-form-group label="enregistrer au format" v-slot="{ ariaDescribedby }">
-        <b-form-radio v-model="format" :aria-describedby="ariaDescribedby" name="some-radios" value="html"> html</b-form-radio>
-        <b-form-radio v-model="format" :aria-describedby="ariaDescribedby" name="some-radios" value="json"> json</b-form-radio>
+        <b-form-radio v-for="f in formats" :key="f.name"
+        v-model="format"
+        :aria-describedby="ariaDescribedby"
+        name="format-radios" :value="f"> {{f.name}}</b-form-radio>
       </b-form-group>
+
+
       <!-- <b-input-group prepend="Nouvelle Json" class="mt-3">
       <b-form-input v-model="njname"></b-form-input>
       <b-input-group-append>
@@ -40,23 +44,29 @@ export default {
       pages: [],
       npname: "NouvellePage",
       //  njname: "Nouveau Json",
-      format: "html"
+      format: null,
+      formats: [
+        {name: "dossier", default: null, mimetype: null, ext: null },
+        {name: "html", default: '<meta charset="utf-8">', mimetype: "text/html", ext: "html" },
+        {name: "html au format json", default: '{}', mimetype: "application/json", ext: "json" },
+        {name: "ressource json", default: '{}', mimetype: "application/json", ext: "json" },
+        {name: "ressource jsonld", default: '{}', mimetype: "application/ld+json", ext: "json" },
+        {name: "ressource ttl", default: '', mimetype: "text/turtle", ext: "ttl" },
+        {name: "txt", default: '', mimetype: "text/plain", ext: "txt" }
+      ]
     }
   },
   created(){
+    this.format = this.formats[1]
     this.pod = this.$store.state.solid.pod
     this.updatePageList()
   },
   methods:{
     createPage(){
       this.public_root = this.pod.storage+"public/"
-      let thing = {name: this.npname, dest: this.public_root, content: '<meta charset="utf-8">', type: {mime: "text/html"}}
-      if(this.format == 'json'){
-        thing.content = '{}'
-        thing.type.mime = "application/json"
-      }
+      let thing = {name: this.npname, dest: this.public_root, content: this.format.default, type: {mime: this.format.mimetype}}
+      console.log(thing)
       this.$createThing(thing)
-      //  this.$setCurrentThing({name: this.npname, url: public_root+this.npname})
       this.updatePageList()
     },
     // createJson(){

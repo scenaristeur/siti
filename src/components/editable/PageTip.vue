@@ -1,13 +1,16 @@
 <template>
   <div>
-    <tiptap v-model="file" @input="sauve"/>
+
+    <Textarea v-if="file.type.mime == 'text/plain'" v-model="file" @sauve="sauve"/>
+    <tiptap v-if="file.type.mime == 'text/html'" v-model="file" @input="sauve"/>
     <ActionList @action="action" />
+    {{ file }}
   </div>
 </template>
 
 <script>
 export default {
-  name: "Page",
+  name: "PageTip",
   data(){
     return{
       // txt: `======Félicitations, votre wiki est installé !
@@ -31,7 +34,8 @@ export default {
   components: {
     // 'ButtonToolbar': () => import('@/components/editable/ButtonToolbar'),
     'ActionList': () => import('@/components/editable/ActionList'),
-    'Tiptap':() => import ('@/components/editable/TipTap.vue')
+    'Tiptap':() => import ('@/components/editable/TipTap.vue'),
+    'Textarea':() => import ('@/components/editable/Textarea.vue')
   },
   methods:{
     action(a){

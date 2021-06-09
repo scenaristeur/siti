@@ -1,7 +1,7 @@
 //import Vue from 'vue';
 
 const state = () => ({
-  file: {}
+  file: {content: null, type: {mime: null}}
 })
 
 const actions = {

@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/siti/precache-manifest.37bfad985aeb3890daebfe5f00e3b7b0.js"
+  "/siti/precache-manifest.381a936198227ad97d5f9ab91709a9dc.js"
 );
 
 workbox.core.setCacheNameDetails({prefix: "siti"});

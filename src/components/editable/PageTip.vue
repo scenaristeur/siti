@@ -1,11 +1,12 @@
 <template>
   <div>
 
-    <input type="range" min="0" max="400" step="1" v-model="data.x" />
+    <Babylone />
+    <!-- <input type="range" min="0" max="400" step="1" v-model="data.x" />
     <input type="range" min="0" max="200" step="1" v-model="data.y" />
 
-    <P5 src="./sketch1.js" :data="data" v-bind.sync="data" />
-  <P5 src="./sketch2.js" :data="data" v-bind.sync="data" />
+    <P5 src="./sketch1.js" :data="data" v-bind.sync="data"></P5> -->
+
     <Textarea v-if="file.type.mime == 'text/plain'" v-model="file" @sauve="sauve"/>
     <tiptap v-if="file.type.mime == 'text/html'" v-model="file" @input="sauve"/>
     <ActionList @action="action" />
@@ -44,7 +45,8 @@ export default {
     'ActionList': () => import('@/components/editable/ActionList'),
     'Tiptap':() => import ('@/components/editable/TipTap.vue'),
     'Textarea':() => import ('@/components/editable/Textarea.vue'),
-    'P5': () => import ('@/components/editable/P5.vue'),
+    //'P5': () => import ('@/components/editable/P5.vue'),
+    'Babylone': () => import ('@/components/editable/Babylone.vue'),
   },
   methods:{
     action(a){

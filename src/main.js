@@ -3,6 +3,7 @@ import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
 import store from './store'
+import vb from 'vue-babylonjs';
 
 import VueSolid from './plugins/vue-solid';
 Vue.use(VueSolid, {store: store});
@@ -17,6 +18,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 Vue.use(BootstrapVue)
 // Optionally install the BootstrapVue icon components plugin
 Vue.use(IconsPlugin)
+
+
+Vue.use(vb);
 
 Vue.config.productionTip = false
 

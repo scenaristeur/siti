@@ -1,5 +1,5 @@
 <template>
-  <div></div>
+  <div>f</div>
 </template>
 
 <script>
@@ -13,27 +13,27 @@ export default {
   methods: {
     // loadScript from https://stackoverflow.com/a/950146
     // loads the p5 javscript code from a file
-    // loadScript: function (url, callback)
-    // {
-    //   // Adding the script tag to the head as suggested before
-    //   var head = document.head;
-    //   var script = document.createElement('script');
-    //   script.type = 'text/javascript';
-    //   script.src = url;
-    //
-    //   // Then bind the event to the callback function.
-    //   // There are several events for cross browser compatibility.
-    //   script.onreadystatechange = callback;
-    //   script.onload = callback;
-    //
-    //   // Fire the loading
-    //   head.appendChild(script);
-    // },
+    loadScript: function (url, callback)
+    {
+      // Adding the script tag to the head as suggested before
+      var head = document.head;
+      var script = document.createElement('script');
+      script.type = 'text/javascript';
+      script.src = url;
 
-    // loadSketch: function() {
-    //   // eslint-disable-next-line
-    //   this.myp5 = new p5(sketch(this));
-    // }
+      // Then bind the event to the callback function.
+      // There are several events for cross browser compatibility.
+      script.onreadystatechange = callback;
+      script.onload = callback;
+
+      // Fire the loading
+      head.appendChild(script);
+    },
+
+    loadSketch: function() {
+      // eslint-disable-next-line
+      this.myp5 = new p5(sketch(this));
+    }
   },
 
   data: function() {
@@ -43,8 +43,7 @@ export default {
   },
 
   mounted() {
-          this.myp5 = new p5(sketch(this));
-  //this.loadScript(this.src, this.loadSketch);
+    this.loadScript(this.src, this.loadSketch);
   },
 
   watch: {

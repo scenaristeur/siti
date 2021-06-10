@@ -5,13 +5,13 @@ function sketch(parent) { // we pass the sketch data from the parent
     // p5 sketch goes here
 
     p.setup = function() {
-      let canvas = p.createCanvas(400, 200);
+      let canvas = p.createCanvas(300, 200);
       canvas.parent(parent.$el);
       p.rectMode(p.CENTER);
     };
 
     p.draw = function() {
-      p.background(0);
+      p.background(255,0,0);
       p.fill(255);
       p.rect(parent.data.x, parent.data.y, 50, 50);
       p.fill(0);
